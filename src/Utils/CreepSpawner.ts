@@ -1,9 +1,12 @@
 import BaseCreepMemory from '../Creeps/BaseCreepMemory';
 import env from '../env';
 
-const workerBody = [WORK, MOVE, MOVE, CARRY];
-const rangerBody = [RANGED_ATTACK, MOVE, MOVE, CARRY];
-const meleeBody = [ATTACK, MOVE, MOVE, CARRY];
+const workerBody1 = [WORK, MOVE, MOVE, CARRY];
+const workerBody2 = [WORK, WORK, MOVE, MOVE, CARRY, CARRY];
+const rangerBody1 = [RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE];
+const rangerBody2 = [RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE];
+const meleeBody1 = [ATTACK, ATTACK, MOVE, MOVE];
+const meleeBody2 = [ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE];
 
 export default () => {
   const creeps = Object.keys(Game.creeps).map(name => Game.creeps[name]);
@@ -26,31 +29,56 @@ export default () => {
   if (builders.length < 2) {
     role = 'builder';
     index = builders.length;
-    body = workerBody;
+
+    if (availableEnergy > 300) {
+      body = workerBody2;
+    } else {
+      body = workerBody1;
+    }
   }
 
   if (rangers.length < 2) {
     role = 'ranger';
     index = rangers.length;
-    body = rangerBody;
+
+    if (availableEnergy > 300) {
+      body = rangerBody2;
+    } else {
+      body = rangerBody1;
+    }
   }
 
   if (melees.length < 2) {
     role = 'melee';
     index = melees.length;
-    body = meleeBody;
+
+    if (availableEnergy > 300) {
+      body = meleeBody2;
+    } else {
+      body = meleeBody1;
+    }
   }
 
   if (upgraders.length < 2) {
     role = 'upgrader';
     index = upgraders.length;
-    body = workerBody;
+
+    if (availableEnergy > 300) {
+      body = workerBody2;
+    } else {
+      body = workerBody1;
+    }
   }
 
   if (harvesters.length < 2) {
     role = 'harvester';
     index = harvesters.length;
-    body = workerBody;
+
+    if (availableEnergy > 300) {
+      body = workerBody2;
+    } else {
+      body = workerBody1;
+    }
   }
 
   if (!body) {
