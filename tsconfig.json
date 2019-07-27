@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["esnext", "dom"],
+    "target": "es2017",
+    "moduleResolution": "node",
+    "outDir": "/Users/emin/AppData/Local/Screeps/scripts/screeps_cogd_io___21025/default",
+    "strict": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src"]
+}

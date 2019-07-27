@@ -1,0 +1,26 @@
+{
+  "name": "screeps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emin93/screeps.git"
+  },
+  "author": {
+    "name": "Emin Khateeb",
+    "email": "emin@emin.ch"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emin93/screeps/issues"
+  },
+  "homepage": "https://github.com/emin93/screeps#readme",
+  "devDependencies": {
+    "@types/screeps": "2.5.4",
+    "typescript": "3.5.3"
+  }
+}
