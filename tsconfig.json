@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["esnext", "dom"],
+    "module": "esnext",
+    "lib": ["esnext"],
     "target": "es2017",
     "moduleResolution": "node",
-    "outDir": "/Users/emin/AppData/Local/Screeps/scripts/screeps_cogd_io___21025/default",
+    "baseUrl": "src",
+    "sourceMap": true,
     "strict": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false
   },
-  "include": ["src"]
+  "exclude": ["node_modules"]
 }
