@@ -38,7 +38,7 @@ export default () => {
   const availableEnergy = Game.rooms[env.roomName].energyAvailable;
   const level = getCurrentGameLevel();
 
-  if (availableEnergy < 300) {
+  if (availableEnergy < 250) {
     return;
   }
 
