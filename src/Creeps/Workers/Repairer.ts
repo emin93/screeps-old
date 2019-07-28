@@ -1,4 +1,5 @@
 import { BaseCreepMemory, workerMoveOpts } from '../Base';
+import upgrade from './Upgrader';
 
 interface UpgraderMemory extends BaseCreepMemory {
   isRepairing: boolean;
@@ -20,7 +21,12 @@ export default (creep: Creep) => {
       filter: structure => structure.hits < structure.hitsMax,
     });
 
-    if (structures.length && creep.repair(structures[0]) == ERR_NOT_IN_RANGE) {
+    if (!structures.length) {
+      upgrade(creep);
+      return;
+    }
+
+    if (creep.repair(structures[0]) == ERR_NOT_IN_RANGE) {
       creep.moveTo(structures[0], workerMoveOpts);
     }
 

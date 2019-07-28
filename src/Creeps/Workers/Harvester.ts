@@ -1,4 +1,5 @@
 import { BaseCreepMemory, workerMoveOpts } from '../Base';
+import repair from './Repairer';
 
 export interface HarvesterMemory extends BaseCreepMemory {
   isHarvesting: boolean;
@@ -41,7 +42,12 @@ export default (creep: Creep) => {
       structure.energy < structure.energyCapacity,
   });
 
-  if (targets.length && creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+  if (!targets.length) {
+    repair(creep);
+    return;
+  }
+
+  if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
     creep.moveTo(targets[0], workerMoveOpts);
   }
 };
