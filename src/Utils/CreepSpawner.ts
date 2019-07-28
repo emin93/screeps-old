@@ -35,13 +35,7 @@ const getIdealNextRole = (creeps: Creep[]): CreepRole | null => {
 export default () => {
   const creeps = Object.keys(Game.creeps).map(name => Game.creeps[name]);
 
-  const availableEnergy = Game.rooms[env.roomName].energyAvailable;
   const level = getCurrentGameLevel();
-
-  if (availableEnergy < 250) {
-    return;
-  }
-
   const role = getIdealNextRole(creeps);
 
   if (!role) {

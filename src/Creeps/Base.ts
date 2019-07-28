@@ -20,12 +20,12 @@ export const getTypeByRole = (role: CreepRole): CreepType => {
 };
 
 export const getBodyForRoleLevel = (role: CreepRole, level: number): BodyPartConstant[] => {
-  const workerBodys = [[WORK, MOVE, MOVE, CARRY], [WORK, WORK, MOVE, MOVE, CARRY, CARRY]];
+  const workerBodys = [[WORK, MOVE, MOVE, CARRY], [WORK, WORK, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY]];
   const rangerBodys = [
     [RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE],
-    [RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE],
+    [RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE, MOVE],
   ];
-  const meleeBodys = [[ATTACK, ATTACK, MOVE, MOVE], [ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE]];
+  const meleeBodys = [[ATTACK, ATTACK, MOVE, MOVE], [ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE]];
 
   const type = getTypeByRole(role);
   let body: BodyPartConstant[];
