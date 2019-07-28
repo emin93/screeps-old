@@ -5,11 +5,6 @@ import { getCurrentGameLevel } from './GameLevel';
 export default () => {
   const level = getCurrentGameLevel();
 
-  const availableEnergy = Game.rooms[env.roomName].energyAvailable;
-  if (availableEnergy < 300) {
-    return;
-  }
-
   const underleveledCreeps = Object.keys(Game.creeps)
     .map(name => Game.creeps[name])
     .filter(creep => {
@@ -31,7 +26,11 @@ export default () => {
 
   const spawn = Game.spawns[env.spawnName];
 
-  if (spawn.recycleCreep(creep) === ERR_NOT_IN_RANGE) {
-    creep.moveTo(spawn.pos);
+  if (creep.transfer(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+    creep.moveTo(spawn);
+
+    return;
   }
+
+  spawn.recycleCreep(creep);
 };
