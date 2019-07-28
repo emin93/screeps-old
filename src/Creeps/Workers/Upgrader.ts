@@ -1,4 +1,4 @@
-import BaseCreepMemory from './BaseCreepMemory';
+import { BaseCreepMemory } from '../Base';
 
 interface UpgraderMemory extends BaseCreepMemory {
   isUpgrading: boolean;

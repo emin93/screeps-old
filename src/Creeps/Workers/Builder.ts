@@ -1,4 +1,4 @@
-import BaseCreepMemory from './BaseCreepMemory';
+import { BaseCreepMemory } from '../Base';
 
 export interface BuilderMemory extends BaseCreepMemory {
   isBuilding: boolean;
