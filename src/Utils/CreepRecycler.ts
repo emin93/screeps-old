@@ -1,6 +1,6 @@
 import { BaseCreepMemory } from '../Creeps/Base';
+import env from '../env';
 import { getCurrentGameLevel } from './GameLevel';
-import env from 'env';
 
 export default () => {
   const creeps = Object.keys(Game.creeps).map(name => Game.creeps[name]);
@@ -19,10 +19,8 @@ export default () => {
 
     const spawn = Game.spawns[env.spawnName];
 
-    if (spawn.recycleCreep(creep)) {
-      return;
+    if (spawn.recycleCreep(creep) === ERR_NOT_IN_RANGE) {
+      creep.moveTo(spawn.pos);
     }
-
-    creep.moveTo(spawn.pos);
   });
 };
