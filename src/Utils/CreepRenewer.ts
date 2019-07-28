@@ -9,7 +9,9 @@ export default () => {
         return false;
       }
 
-      return creep.ticksToLive <= 100;
+      const memory = <BaseCreepMemory>creep.memory;
+
+      return creep.ticksToLive <= 100 || memory.isRenewing;
     });
 
   if (!renewableCreeps.length) {
@@ -31,7 +33,7 @@ export default () => {
     return;
   }
 
-  if (response === OK && creep.ticksToLive && creep.ticksToLive >= 500) {
+  if (response === OK && creep.ticksToLive && creep.ticksToLive >= 300) {
     memory.isRenewing = false;
   }
 };

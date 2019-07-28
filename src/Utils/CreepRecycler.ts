@@ -15,7 +15,7 @@ export default () => {
     .filter(creep => {
       const memory = <BaseCreepMemory>creep.memory;
 
-      return memory.level < level;
+      return memory.level < level || memory.isRecycling;
     });
 
   if (!underleveledCreeps.length) {
