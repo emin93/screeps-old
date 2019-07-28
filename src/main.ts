@@ -3,6 +3,7 @@ import meleeDefend from './Creeps/Defenders/Melee';
 import rangeDefend from './Creeps/Defenders/Ranger';
 import build from './Creeps/Workers/Builder';
 import harvest from './Creeps/Workers/Harvester';
+import repair from './Creeps/Workers/Repairer';
 import upgrade from './Creeps/Workers/Upgrader';
 import recycleCreeps from './Utils/CreepRecycler';
 import renewCreeps from './Utils/CreepRenewer';
@@ -27,24 +28,27 @@ export const loop = () => {
       return;
     }
 
-    if (memory.role === 'harvester') {
-      harvest(creep);
-    }
-
-    if (memory.role === 'builder') {
-      build(creep);
-    }
-
-    if (memory.role === 'upgrader') {
-      upgrade(creep);
-    }
-
-    if (memory.role === 'ranger') {
-      rangeDefend(creep);
-    }
-
-    if (memory.role === 'melee') {
-      meleeDefend(creep);
+    switch (memory.role) {
+      case 'harvester':
+        harvest(creep);
+        break;
+      case 'builder':
+        build(creep);
+        break;
+      case 'upgrader':
+        upgrade(creep);
+        break;
+      case 'repairer':
+        repair(creep);
+        break;
+      case 'ranger':
+        rangeDefend(creep);
+        break;
+      case 'melee':
+        meleeDefend(creep);
+        break;
+      default:
+        harvest(creep);
     }
   });
 };

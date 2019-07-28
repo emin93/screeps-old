@@ -1,4 +1,4 @@
-export type CreepRole = 'builder' | 'harvester' | 'upgrader' | 'ranger' | 'melee';
+export type CreepRole = 'builder' | 'harvester' | 'upgrader' | 'repairer' | 'ranger' | 'melee';
 export type CreepType = 'defender' | 'worker';
 
 export interface BaseCreepMemory extends CreepMemory {
@@ -13,6 +13,7 @@ export const getTypeByRole = (role: CreepRole): CreepType => {
     builder: 'worker',
     harvester: 'worker',
     upgrader: 'worker',
+    repairer: 'worker',
     ranger: 'defender',
     melee: 'defender',
   };
