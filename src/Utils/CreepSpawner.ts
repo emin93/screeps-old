@@ -14,11 +14,11 @@ const getIdealNextRole = (creeps: Creep[]): CreepRole | null => {
     return 'harvester';
   }
 
-  if (upgraders.length < 3) {
+  if (upgraders.length < 2) {
     return 'upgrader';
   }
 
-  if (builders.length < 3) {
+  if (builders.length < 2) {
     return 'builder';
   }
 

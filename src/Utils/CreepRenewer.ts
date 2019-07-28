@@ -11,7 +11,7 @@ export default () => {
 
       const memory = <BaseCreepMemory>creep.memory;
 
-      return creep.ticksToLive <= 100 || memory.isRenewing;
+      return creep.ticksToLive <= 50 || memory.isRenewing;
     });
 
   if (!renewableCreeps.length) {
@@ -28,6 +28,7 @@ export default () => {
   const spawn = Game.spawns[env.spawnName];
 
   const response = spawn.renewCreep(creep);
+
   if (response === ERR_NOT_IN_RANGE) {
     creep.moveTo(spawn.pos);
     return;
