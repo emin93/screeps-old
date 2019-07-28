@@ -1,5 +1,21 @@
+import { BaseCreepMemory } from '../Base';
+
+export interface HarvesterMemory extends BaseCreepMemory {
+  isHarvesting: boolean;
+}
+
 export default (creep: Creep) => {
-  if (creep.carry.energy < creep.carryCapacity) {
+  const memory = <HarvesterMemory>creep.memory;
+
+  if (creep.carry.energy === 0) {
+    memory.isHarvesting = true;
+  }
+
+  if (creep.carry.energy === creep.carryCapacity) {
+    memory.isHarvesting = false;
+  }
+
+  if (memory.isHarvesting) {
     const droppedResources = creep.room.find(FIND_DROPPED_RESOURCES);
 
     if (droppedResources.length > 0) {
