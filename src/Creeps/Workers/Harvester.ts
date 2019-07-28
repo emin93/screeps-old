@@ -1,4 +1,4 @@
-import { BaseCreepMemory } from '../Base';
+import { BaseCreepMemory, workerMoveOpts } from '../Base';
 
 export interface HarvesterMemory extends BaseCreepMemory {
   isHarvesting: boolean;
@@ -7,11 +7,11 @@ export interface HarvesterMemory extends BaseCreepMemory {
 export default (creep: Creep) => {
   const memory = <HarvesterMemory>creep.memory;
 
-  if (creep.carry.energy === 0) {
+  if (!memory.isHarvesting && creep.carry.energy === 0) {
     memory.isHarvesting = true;
   }
 
-  if (creep.carry.energy === creep.carryCapacity) {
+  if (memory.isHarvesting && creep.carry.energy === creep.carryCapacity) {
     memory.isHarvesting = false;
   }
 
@@ -20,13 +20,13 @@ export default (creep: Creep) => {
 
     if (droppedResources.length > 0) {
       if (creep.pickup(droppedResources[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(droppedResources[0]);
+        creep.moveTo(droppedResources[0], workerMoveOpts);
       }
     } else {
       const sources = creep.room.find(FIND_SOURCES);
 
-      if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0]);
+      if (sources.length && creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(sources[0], workerMoveOpts);
       }
     }
 
@@ -34,19 +34,14 @@ export default (creep: Creep) => {
   }
 
   const targets = creep.room.find(FIND_STRUCTURES, {
-    filter: structure => {
-      return (
-        (structure.structureType == STRUCTURE_EXTENSION ||
-          structure.structureType == STRUCTURE_SPAWN ||
-          structure.structureType == STRUCTURE_TOWER) &&
-        structure.energy < structure.energyCapacity
-      );
-    },
+    filter: structure =>
+      (structure.structureType == STRUCTURE_EXTENSION ||
+        structure.structureType == STRUCTURE_SPAWN ||
+        structure.structureType == STRUCTURE_TOWER) &&
+      structure.energy < structure.energyCapacity,
   });
 
-  if (targets.length > 0) {
-    if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-      creep.moveTo(targets[0]);
-    }
+  if (targets.length && creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+    creep.moveTo(targets[0], workerMoveOpts);
   }
 };

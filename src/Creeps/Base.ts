@@ -5,6 +5,7 @@ export interface BaseCreepMemory extends CreepMemory {
   role: CreepRole;
   level: number;
   isRecycling: boolean;
+  isRenewing: boolean;
 }
 
 export const getTypeByRole = (role: CreepRole): CreepType => {
@@ -41,4 +42,12 @@ export const getBodyForRoleLevel = (role: CreepRole, level: number): BodyPartCon
   }
 
   return body;
+};
+
+export const workerMoveOpts: MoveToOpts = {
+  visualizePathStyle: { stroke: '#9a91ff' },
+};
+
+export const defenderMoveOpts: MoveToOpts = {
+  visualizePathStyle: { stroke: '#ff9191' },
 };

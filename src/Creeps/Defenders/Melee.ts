@@ -1,3 +1,5 @@
+import { defenderMoveOpts } from '../Base';
+
 export default (creep: Creep) => {
   const closestEnemy = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
@@ -7,11 +9,11 @@ export default (creep: Creep) => {
       return;
     }
 
-    creep.moveTo(flag);
+    creep.moveTo(flag, defenderMoveOpts);
     return;
   }
 
   if (creep.attack(closestEnemy) === ERR_NOT_IN_RANGE) {
-    creep.moveTo(closestEnemy);
+    creep.moveTo(closestEnemy, defenderMoveOpts);
   }
 };
