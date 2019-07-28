@@ -9,23 +9,23 @@ const getIdealNextRole = (creeps: Creep[]): CreepRole | null => {
   const rangers = creeps.filter(creep => (<BaseCreepMemory>creep.memory).role === 'ranger');
   const melees = creeps.filter(creep => (<BaseCreepMemory>creep.memory).role === 'melee');
 
-  if (harvesters.length < 2) {
+  if (harvesters.length < 3) {
     return 'harvester';
   }
 
-  if (upgraders.length < 2) {
+  if (upgraders.length < 3) {
     return 'upgrader';
   }
 
-  if (rangers.length < 2) {
+  if (rangers.length < 3) {
     return 'ranger';
   }
 
-  if (melees.length < 2) {
+  if (melees.length < 3) {
     return 'melee';
   }
 
-  if (builders.length < 2) {
+  if (builders.length < 3) {
     return 'builder';
   }
 
