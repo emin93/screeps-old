@@ -16,7 +16,7 @@ export default (creep: Creep) => {
   }
 
   if (memory.isRepairing) {
-    const structures = creep.room.find(FIND_MY_STRUCTURES, {
+    const structures = creep.room.find(FIND_STRUCTURES, {
       filter: structure => structure.hits < structure.hitsMax,
     });
 
