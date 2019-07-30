@@ -5,6 +5,12 @@ import { getCurrentGameLevel } from './GameLevel';
 export default () => {
   const level = getCurrentGameLevel();
 
+  const room = Game.rooms[env.roomName];
+  const availableEnergyInPercent = (room.energyCapacityAvailable / 100) * room.energyAvailable;
+  if (availableEnergyInPercent < 80) {
+    return;
+  }
+
   const underleveledCreeps = Object.keys(Game.creeps)
     .map(name => Game.creeps[name])
     .filter(creep => {
