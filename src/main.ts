@@ -5,6 +5,7 @@ import build from './Creeps/Workers/Builder';
 import harvest from './Creeps/Workers/Harvester';
 import repair from './Creeps/Workers/Repairer';
 import upgrade from './Creeps/Workers/Upgrader';
+import tower from './Tower';
 import recycleCreeps from './Utils/CreepRecycler';
 import renewCreeps from './Utils/CreepRenewer';
 import spawnCreeps from './Utils/CreepSpawner';
@@ -50,5 +51,15 @@ export const loop = () => {
       default:
         harvest(creep);
     }
+  });
+
+  Object.keys(Game.structures).forEach(name => {
+    const structure = Game.structures[name];
+
+    if (structure.structureType !== STRUCTURE_TOWER) {
+      return;
+    }
+
+    tower(<StructureTower>structure);
   });
 };
