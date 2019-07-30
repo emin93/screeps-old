@@ -3,7 +3,7 @@ export default (tower: StructureTower) => {
     filter: structure => structure.hits < structure.hitsMax,
   });
 
-  if (closestDamagedStructure) {
+  if (closestDamagedStructure && closestDamagedStructure.structureType !== STRUCTURE_WALL) {
     tower.repair(closestDamagedStructure);
   }
 
