@@ -28,7 +28,7 @@ export default () =>
         return;
       }
 
-      if (response === OK && creep.ticksToLive >= 500) {
+      if (response === OK && creep.ticksToLive > memory.level * 150) {
         memory.isRenewing = false;
       }
     });
