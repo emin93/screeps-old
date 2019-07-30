@@ -7,7 +7,7 @@ export default () => {
 
   const room = Game.rooms[env.roomName];
   const availableEnergyInPercent = (room.energyAvailable / room.energyCapacityAvailable) * 100;
-  if (availableEnergyInPercent < 95) {
+  if (availableEnergyInPercent < 90) {
     return;
   }
 
