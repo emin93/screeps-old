@@ -36,9 +36,9 @@ export default (creep: Creep) => {
 
   const targets = creep.room.find(FIND_STRUCTURES, {
     filter: structure =>
-      (structure.structureType == STRUCTURE_EXTENSION ||
-        structure.structureType == STRUCTURE_SPAWN ||
-        structure.structureType == STRUCTURE_TOWER) &&
+      (structure.structureType === STRUCTURE_EXTENSION ||
+        structure.structureType === STRUCTURE_SPAWN ||
+        structure.structureType === STRUCTURE_TOWER) &&
       structure.energy < structure.energyCapacity,
   });
 

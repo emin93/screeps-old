@@ -1,9 +1,9 @@
 export default (tower: StructureTower) => {
   const closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-    filter: structure => structure.hits < structure.hitsMax,
+    filter: structure => structure.structureType !== STRUCTURE_WALL && structure.hits < structure.hitsMax,
   });
 
-  if (closestDamagedStructure && closestDamagedStructure.structureType !== STRUCTURE_WALL) {
+  if (closestDamagedStructure) {
     tower.repair(closestDamagedStructure);
   }
 

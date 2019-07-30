@@ -20,7 +20,7 @@ export default (creep: Creep) => {
     const structures = creep.room.find(FIND_STRUCTURES, {
       filter: structure => {
         if (structure.structureType === STRUCTURE_WALL) {
-          return false;
+          return structure.hits < 10000;
         }
 
         return structure.hits < structure.hitsMax;
