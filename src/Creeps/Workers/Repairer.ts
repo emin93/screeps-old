@@ -1,5 +1,5 @@
 import { BaseCreepMemory, workerMoveOpts } from '../Base';
-import upgrade from './Upgrader';
+import harvest from './Harvester';
 
 interface UpgraderMemory extends BaseCreepMemory {
   isRepairing: boolean;
@@ -20,7 +20,7 @@ export default (creep: Creep) => {
     const structures = creep.room.find(FIND_STRUCTURES, {
       filter: structure => {
         if (structure.structureType === STRUCTURE_WALL) {
-          return structure.hits < 10000;
+          return false;
         }
 
         return structure.hits < structure.hitsMax;
@@ -28,7 +28,7 @@ export default (creep: Creep) => {
     });
 
     if (!structures.length) {
-      upgrade(creep);
+      harvest(creep);
       return;
     }
 

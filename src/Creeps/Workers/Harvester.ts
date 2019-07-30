@@ -1,5 +1,5 @@
 import { BaseCreepMemory, workerMoveOpts } from '../Base';
-import repair from './Repairer';
+import upgrade from './Upgrader';
 
 export interface HarvesterMemory extends BaseCreepMemory {
   isHarvesting: boolean;
@@ -43,7 +43,7 @@ export default (creep: Creep) => {
   });
 
   if (!targets.length) {
-    repair(creep);
+    upgrade(creep);
     return;
   }
 
