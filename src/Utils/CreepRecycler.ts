@@ -6,8 +6,8 @@ export default () => {
   const level = getCurrentGameLevel();
 
   const room = Game.rooms[env.roomName];
-  const availableEnergyInPercent = (room.energyCapacityAvailable / 100) * room.energyAvailable;
-  if (availableEnergyInPercent < 80) {
+  const availableEnergyInPercent = (room.energyAvailable / room.energyCapacityAvailable) * 100;
+  if (availableEnergyInPercent < 90) {
     return;
   }
 
