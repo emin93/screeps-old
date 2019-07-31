@@ -13,7 +13,7 @@ export default (creep: Creep) => {
     return;
   }
 
-  if (creep.attack(closestEnemy) === ERR_NOT_IN_RANGE) {
+  if (creep.rangedAttack(closestEnemy) === ERR_NOT_IN_RANGE) {
     creep.moveTo(closestEnemy, defenderMoveToEnemyOpts);
   }
 };
