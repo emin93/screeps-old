@@ -1,5 +1,6 @@
 import { BaseCreepMemory } from '../Creeps/Base';
 import env from '../env';
+import { getExtensions, getMaxExtensions } from './ExtensionSpawner';
 import { getCurrentGameLevel } from './GameLevel';
 
 export default () => {
@@ -7,7 +8,7 @@ export default () => {
 
   const room = Game.rooms[env.roomName];
   const availableEnergyInPercent = (room.energyAvailable / room.energyCapacityAvailable) * 100;
-  if (availableEnergyInPercent < 90) {
+  if (availableEnergyInPercent < 90 || getExtensions().length < getMaxExtensions()) {
     return;
   }
 

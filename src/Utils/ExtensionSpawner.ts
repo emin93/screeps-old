@@ -1,36 +1,45 @@
 import env from '../env';
 
-export default () => {
-  const controller = Game.rooms[env.roomName].controller;
-
-  if (!controller) {
-    return;
-  }
-
-  const level = controller.level;
-
-  if (level === 1) {
-    return;
-  }
-
-  const maxExtensions = level * 5;
-  const spawn = Game.spawns[env.spawnName];
-  const room = Game.rooms[env.roomName];
-
-  const extensions = room.find(FIND_STRUCTURES, {
+export const getExtensions = () =>
+  Game.rooms[env.roomName].find(FIND_STRUCTURES, {
     filter: structure => structure.structureType === STRUCTURE_EXTENSION,
   });
 
-  const extensionConstructionSites = room.find(FIND_CONSTRUCTION_SITES, {
+export const getExtensionConstructionSites = () =>
+  Game.rooms[env.roomName].find(FIND_CONSTRUCTION_SITES, {
     filter: constructionSite => constructionSite.structureType === STRUCTURE_EXTENSION,
   });
 
-  const extensionCount = extensions.length + extensionConstructionSites.length;
+export const getMaxExtensions = () => {
+  const controller = Game.rooms[env.roomName].controller;
 
-  if (extensionCount >= maxExtensions) {
+  if (!controller || controller.level === 1) {
+    return 0;
+  }
+
+  return (controller.level - 1) * 5;
+};
+
+export default () => {
+  const maxExtensions = getMaxExtensions();
+  const spawn = Game.spawns[env.spawnName];
+
+  const extensions = getExtensions();
+  const extensionConstructionSites = getExtensionConstructionSites();
+
+  const totalExtensions = extensions.length + extensionConstructionSites.length;
+
+  if (totalExtensions >= maxExtensions) {
     return;
   }
 
-  const newPos = new RoomPosition(spawn.pos.x + extensionCount, spawn.pos.y, env.roomName);
+  const newPos = new RoomPosition(spawn.pos.x + 1 + totalExtensions, spawn.pos.y, env.roomName);
+
+  if (totalExtensions % 5 === 0) {
+    newPos.y += totalExtensions / 5;
+  }
+
+  console.log(newPos.y);
+
   newPos.createConstructionSite(STRUCTURE_EXTENSION);
 };

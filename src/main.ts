@@ -9,6 +9,7 @@ import tower from './Tower';
 import recycleCreeps from './Utils/CreepRecycler';
 import renewCreeps from './Utils/CreepRenewer';
 import spawnCreeps from './Utils/CreepSpawner';
+import spawnExtensions from './Utils/ExtensionSpawner';
 import collectGarbage from './Utils/GarbageCollector';
 
 export const loop = () => {
@@ -16,6 +17,7 @@ export const loop = () => {
   spawnCreeps();
   recycleCreeps();
   renewCreeps();
+  spawnExtensions();
 
   Object.keys(Game.creeps).forEach(name => {
     const creep = Game.creeps[name];
