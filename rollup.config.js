@@ -4,6 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 
 const path = '/Users/emin/AppData/Local/Screeps/scripts/screeps_cogd_io___21025/default';
+//const path = '/Users/emin/AppData/Local/Screeps/scripts/screeps.com/default';
 
 module.exports = {
   input: 'src/main.ts',

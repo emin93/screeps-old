@@ -1,6 +1,75 @@
 export type CreepRole = 'builder' | 'harvester' | 'upgrader' | 'repairer' | 'ranger' | 'melee';
 export type CreepType = 'defender' | 'worker';
 
+const workerBodys = [
+  [
+    ...Array.from({ length: 2 }).map(() => MOVE),
+    ...Array.from({ length: 1 }).map(() => WORK),
+    ...Array.from({ length: 1 }).map(() => CARRY),
+  ],
+  [
+    ...Array.from({ length: 4 }).map(() => MOVE),
+    ...Array.from({ length: 2 }).map(() => WORK),
+    ...Array.from({ length: 2 }).map(() => CARRY),
+  ],
+  [
+    ...Array.from({ length: 7 }).map(() => MOVE),
+    ...Array.from({ length: 2 }).map(() => WORK),
+    ...Array.from({ length: 3 }).map(() => CARRY),
+  ],
+  [
+    ...Array.from({ length: 11 }).map(() => MOVE),
+    ...Array.from({ length: 4 }).map(() => WORK),
+    ...Array.from({ length: 4 }).map(() => CARRY),
+  ],
+];
+
+const rangerBodys = [
+  [
+    ...Array.from({ length: 1 }).map(() => TOUGH),
+    ...Array.from({ length: 2 }).map(() => MOVE),
+    ...Array.from({ length: 1 }).map(() => RANGED_ATTACK),
+  ],
+  [
+    ...Array.from({ length: 3 }).map(() => TOUGH),
+    ...Array.from({ length: 5 }).map(() => MOVE),
+    ...Array.from({ length: 1 }).map(() => RANGED_ATTACK),
+  ],
+  [
+    ...Array.from({ length: 6 }).map(() => TOUGH),
+    ...Array.from({ length: 7 }).map(() => MOVE),
+    ...Array.from({ length: 2 }).map(() => RANGED_ATTACK),
+  ],
+  [
+    ...Array.from({ length: 16 }).map(() => TOUGH),
+    ...Array.from({ length: 14 }).map(() => MOVE),
+    ...Array.from({ length: 2 }).map(() => RANGED_ATTACK),
+  ],
+];
+
+const meleeBodys = [
+  [
+    ...Array.from({ length: 1 }).map(() => TOUGH),
+    ...Array.from({ length: 2 }).map(() => MOVE),
+    ...Array.from({ length: 1 }).map(() => ATTACK),
+  ],
+  [
+    ...Array.from({ length: 3 }).map(() => TOUGH),
+    ...Array.from({ length: 5 }).map(() => MOVE),
+    ...Array.from({ length: 2 }).map(() => ATTACK),
+  ],
+  [
+    ...Array.from({ length: 6 }).map(() => TOUGH),
+    ...Array.from({ length: 7 }).map(() => MOVE),
+    ...Array.from({ length: 3 }).map(() => ATTACK),
+  ],
+  [
+    ...Array.from({ length: 16 }).map(() => TOUGH),
+    ...Array.from({ length: 14 }).map(() => MOVE),
+    ...Array.from({ length: 3 }).map(() => ATTACK),
+  ],
+];
+
 export interface BaseCreepMemory extends CreepMemory {
   role: CreepRole;
   level: number;
@@ -22,22 +91,6 @@ export const getTypeByRole = (role: CreepRole): CreepType => {
 };
 
 export const getBodyForRoleLevel = (role: CreepRole, level: number): BodyPartConstant[] => {
-  const workerBodys = [
-    [WORK, MOVE, MOVE, CARRY],
-    [WORK, WORK, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY],
-    [WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY],
-  ];
-  const rangerBodys = [
-    [RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE],
-    [RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE, MOVE],
-    [TOUGH, TOUGH, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE, MOVE],
-  ];
-  const meleeBodys = [
-    [ATTACK, ATTACK, MOVE, MOVE],
-    [ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE],
-    [TOUGH, TOUGH, TOUGH, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE, MOVE, MOVE],
-  ];
-
   const type = getTypeByRole(role);
   let body: BodyPartConstant[];
 
