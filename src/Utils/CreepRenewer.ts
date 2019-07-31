@@ -24,7 +24,7 @@ export default () =>
       const response = spawn.renewCreep(creep);
 
       if (response === ERR_NOT_IN_RANGE) {
-        creep.moveTo(spawn.pos);
+        creep.moveTo(spawn.pos, { visualizePathStyle: { fill: '#ff42f2', opacity: 0.7 } });
         return;
       }
 

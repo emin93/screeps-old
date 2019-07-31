@@ -1,4 +1,4 @@
-import { BaseCreepMemory, workerMoveOpts } from '../Base';
+import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
 import harvest from './Harvester';
 
 interface UpgraderMemory extends BaseCreepMemory {
@@ -42,6 +42,6 @@ export default (creep: Creep) => {
   const sources = creep.room.find(FIND_SOURCES);
 
   if (sources.length && creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-    creep.moveTo(sources[0], workerMoveOpts);
+    creep.moveTo(sources[0], workerMoveToSourceOpts);
   }
 };

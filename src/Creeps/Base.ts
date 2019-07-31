@@ -108,9 +108,17 @@ export const getBodyForRoleLevel = (role: CreepRole, level: number): BodyPartCon
 };
 
 export const workerMoveOpts: MoveToOpts = {
-  visualizePathStyle: { stroke: '#9a91ff' },
+  visualizePathStyle: { stroke: '#00eb42', opacity: 0.7 },
+};
+
+export const workerMoveToSourceOpts: MoveToOpts = {
+  visualizePathStyle: { stroke: '#ebeb05', opacity: 0.7 },
 };
 
 export const defenderMoveOpts: MoveToOpts = {
-  visualizePathStyle: { stroke: '#ff9191' },
+  visualizePathStyle: { stroke: '#ffffff', opacity: 0.7 },
+};
+
+export const defenderMoveToEnemyOpts: MoveToOpts = {
+  visualizePathStyle: { stroke: '#ff0000', opacity: 1 },
 };

@@ -33,7 +33,7 @@ export default () => {
   const spawn = Game.spawns[env.spawnName];
 
   if (creep.transfer(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-    creep.moveTo(spawn);
+    creep.moveTo(spawn, { visualizePathStyle: { fill: '#000000', opacity: 1 } });
 
     return;
   }
