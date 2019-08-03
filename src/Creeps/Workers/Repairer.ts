@@ -13,7 +13,7 @@ export default (creep: Creep) => {
     memory.job = 'repairing';
   }
 
-  if (memory.job === 'repairing') {
+  if (memory.job === 'repairing' || memory.job === 'building') {
     const structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
       filter: structure => {
         if (structure.structureType === STRUCTURE_WALL) {
