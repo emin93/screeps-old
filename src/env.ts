@@ -1,5 +1,5 @@
 export default {
-  roomName: 'E5N8',
+  roomName: 'E18N5',
   //roomName: 'sim',
   spawnName: 'Spawn1',
 };
