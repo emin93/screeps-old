@@ -7,8 +7,8 @@ export const getCurrentGameLevel = () => {
     return 1;
   }
 
-  if (controller.level > 1) {
-    return 1;
+  if (controller.level > 4) {
+    return 4;
   }
 
   return controller.level;
