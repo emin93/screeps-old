@@ -20,7 +20,9 @@ export default (creep: Creep) => {
         creep.moveTo(droppedResource, workerMoveToSourceOpts);
       }
     } else {
-      const source = creep.pos.findClosestByRange(FIND_SOURCES);
+      const source = creep.pos.findClosestByRange(FIND_SOURCES, {
+        filter: source => source.energy > 0,
+      });
 
       if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
         creep.moveTo(source, workerMoveToSourceOpts);

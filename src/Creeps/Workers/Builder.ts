@@ -1,4 +1,4 @@
-import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
+import { BaseCreepMemory, workerMoveOpts } from '../Base';
 import harvest from './Harvester';
 
 export default (creep: Creep) => {
@@ -27,9 +27,5 @@ export default (creep: Creep) => {
     return;
   }
 
-  const source = creep.pos.findClosestByRange(FIND_SOURCES);
-
-  if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
-    creep.moveTo(source, workerMoveToSourceOpts);
-  }
+  harvest(creep);
 };
