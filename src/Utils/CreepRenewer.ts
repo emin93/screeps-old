@@ -32,7 +32,10 @@ export default () => {
     return;
   }
 
-  if ((response === OK && creep.ticksToLive && creep.ticksToLive > memory.level * 200) || room.energyAvailable < 100) {
+  if (
+    (response === OK && creep.ticksToLive && creep.ticksToLive > memory.level * 200) ||
+    response === ERR_NOT_ENOUGH_ENERGY
+  ) {
     if (memory.type === 'worker') {
       memory.job = 'harvesting';
     } else {
