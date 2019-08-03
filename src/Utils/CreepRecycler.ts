@@ -5,21 +5,20 @@ import { getCurrentGameLevel } from './GameLevel';
 
 export default () => {
   const level = getCurrentGameLevel();
-
   const room = Game.rooms[env.roomName];
+
   const availableEnergyInPercent = (room.energyAvailable / room.energyCapacityAvailable) * 100;
   if (availableEnergyInPercent < 90 || getExtensions().length < getMaxExtensions()) {
     return;
   }
 
-  const underleveledCreeps = Object.keys(Game.creeps)
-    .sort()
-    .map(name => Game.creeps[name])
-    .filter(creep => {
+  const underleveledCreeps = room.find(FIND_CREEPS, {
+    filter: creep => {
       const memory = <BaseCreepMemory>creep.memory;
 
       return memory.job === 'recycling' || memory.level < level;
-    });
+    },
+  });
 
   if (!underleveledCreeps.length) {
     return;
