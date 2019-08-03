@@ -42,18 +42,18 @@ const rangerBodys = [
   ],
   [
     ...Array.from({ length: 3 }).map(() => TOUGH),
+    ...Array.from({ length: 3 }).map(() => MOVE),
+    ...Array.from({ length: 2 }).map(() => RANGED_ATTACK),
+  ],
+  [
+    ...Array.from({ length: 3 }).map(() => TOUGH),
     ...Array.from({ length: 5 }).map(() => MOVE),
-    ...Array.from({ length: 1 }).map(() => RANGED_ATTACK),
+    ...Array.from({ length: 3 }).map(() => RANGED_ATTACK),
   ],
   [
-    ...Array.from({ length: 6 }).map(() => TOUGH),
-    ...Array.from({ length: 7 }).map(() => MOVE),
-    ...Array.from({ length: 2 }).map(() => RANGED_ATTACK),
-  ],
-  [
-    ...Array.from({ length: 16 }).map(() => TOUGH),
-    ...Array.from({ length: 14 }).map(() => MOVE),
-    ...Array.from({ length: 2 }).map(() => RANGED_ATTACK),
+    ...Array.from({ length: 10 }).map(() => TOUGH),
+    ...Array.from({ length: 10 }).map(() => MOVE),
+    ...Array.from({ length: 4 }).map(() => RANGED_ATTACK),
   ],
 ];
 
