@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "rollup -w",
-    "build": "rollup -c"
+    "start": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -22,9 +21,9 @@
   "homepage": "https://github.com/emin93/screeps#readme",
   "devDependencies": {
     "@types/screeps": "2.5.4",
-    "rollup": "1.17.0",
+    "rollup": "1.18.0",
     "rollup-plugin-clear": "2.0.7",
-    "rollup-plugin-commonjs": "10.0.1",
+    "rollup-plugin-commonjs": "10.0.2",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-typescript": "1.0.1",
     "rollup-plugin-typescript2": "0.22.1",
