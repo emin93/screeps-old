@@ -1,39 +1,35 @@
 import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
 import harvest from './Harvester';
 
-export interface BuilderMemory extends BaseCreepMemory {
-  isBuilding: boolean;
-}
-
 export default (creep: Creep) => {
-  const memory = <BuilderMemory>creep.memory;
+  const memory = <BaseCreepMemory>creep.memory;
 
-  if (memory.isBuilding && creep.carry.energy == 0) {
-    memory.isBuilding = false;
+  if (memory.job === 'building' && creep.carry.energy == 0) {
+    memory.job = 'harvesting';
   }
 
-  if (!memory.isBuilding && creep.carry.energy == creep.carryCapacity) {
-    memory.isBuilding = true;
+  if (memory.job !== 'building' && creep.carry.energy == creep.carryCapacity) {
+    memory.job = 'building';
   }
 
-  if (memory.isBuilding) {
-    const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+  if (memory.job === 'building') {
+    const target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
 
-    if (!targets.length) {
+    if (!target) {
       harvest(creep);
       return;
     }
 
-    if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-      creep.moveTo(targets[0], workerMoveOpts);
+    if (creep.build(target) == ERR_NOT_IN_RANGE) {
+      creep.moveTo(target, workerMoveOpts);
     }
 
     return;
   }
 
-  const sources = creep.room.find(FIND_SOURCES);
+  const source = creep.pos.findClosestByRange(FIND_SOURCES);
 
-  if (sources.length && creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-    creep.moveTo(sources[0], workerMoveToSourceOpts);
+  if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
+    creep.moveTo(source, workerMoveToSourceOpts);
   }
 };

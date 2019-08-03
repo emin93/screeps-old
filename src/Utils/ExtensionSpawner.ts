@@ -33,13 +33,5 @@ export default () => {
     return;
   }
 
-  const newPos = new RoomPosition(spawn.pos.x + 1 + totalExtensions, spawn.pos.y, env.roomName);
-
-  if (totalExtensions % 5 === 0) {
-    newPos.y += totalExtensions / 5;
-  }
-
-  console.log(newPos.y);
-
-  newPos.createConstructionSite(STRUCTURE_EXTENSION);
+  const newPos = new RoomPosition(spawn.pos.x, spawn.pos.y, env.roomName);
 };

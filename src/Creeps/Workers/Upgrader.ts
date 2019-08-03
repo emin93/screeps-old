@@ -1,21 +1,17 @@
 import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
 
-interface UpgraderMemory extends BaseCreepMemory {
-  isUpgrading: boolean;
-}
-
 export default (creep: Creep) => {
-  const memory = <UpgraderMemory>creep.memory;
+  const memory = <BaseCreepMemory>creep.memory;
 
-  if (memory.isUpgrading && creep.carry.energy == 0) {
-    memory.isUpgrading = false;
+  if (memory.job === 'upgrading' && creep.carry.energy == 0) {
+    memory.job = 'harvesting';
   }
 
-  if (!memory.isUpgrading && creep.carry.energy == creep.carryCapacity) {
-    memory.isUpgrading = true;
+  if (memory.job !== 'harvesting' && creep.carry.energy == creep.carryCapacity) {
+    memory.job = 'upgrading';
   }
 
-  if (memory.isUpgrading) {
+  if (memory.job === 'upgrading') {
     if (!creep.room.controller) {
       return;
     }
@@ -27,9 +23,9 @@ export default (creep: Creep) => {
     return;
   }
 
-  const sources = creep.room.find(FIND_SOURCES);
+  const source = creep.pos.findClosestByRange(FIND_SOURCES);
 
-  if (sources.length && creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-    creep.moveTo(sources[0], workerMoveToSourceOpts);
+  if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
+    creep.moveTo(source, workerMoveToSourceOpts);
   }
 };

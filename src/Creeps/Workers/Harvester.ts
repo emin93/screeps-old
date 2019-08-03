@@ -1,33 +1,29 @@
 import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
 import upgrade from './Upgrader';
 
-export interface HarvesterMemory extends BaseCreepMemory {
-  isHarvesting: boolean;
-}
-
 export default (creep: Creep) => {
-  const memory = <HarvesterMemory>creep.memory;
+  const memory = <BaseCreepMemory>creep.memory;
 
-  if (!memory.isHarvesting && creep.carry.energy === 0) {
-    memory.isHarvesting = true;
+  if (memory.job !== 'harvesting' && creep.carry.energy === 0) {
+    memory.job = 'harvesting';
   }
 
-  if (memory.isHarvesting && creep.carry.energy === creep.carryCapacity) {
-    memory.isHarvesting = false;
+  if (memory.job === 'harvesting' && creep.carry.energy === creep.carryCapacity) {
+    memory.job = 'replenishing';
   }
 
-  if (memory.isHarvesting) {
-    const droppedResources = creep.room.find(FIND_DROPPED_RESOURCES);
+  if (memory.job === 'harvesting') {
+    const droppedResource = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
 
-    if (droppedResources.length > 0) {
-      if (creep.pickup(droppedResources[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(droppedResources[0], workerMoveToSourceOpts);
+    if (droppedResource) {
+      if (creep.pickup(droppedResource) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(droppedResource, workerMoveToSourceOpts);
       }
     } else {
-      const sources = creep.room.find(FIND_SOURCES);
+      const source = creep.pos.findClosestByRange(FIND_SOURCES);
 
-      if (sources.length && creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], workerMoveToSourceOpts);
+      if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(source, workerMoveToSourceOpts);
       }
     }
 

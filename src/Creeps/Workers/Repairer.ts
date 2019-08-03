@@ -17,7 +17,7 @@ export default (creep: Creep) => {
   }
 
   if (memory.isRepairing) {
-    const structures = creep.room.find(FIND_STRUCTURES, {
+    const structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
       filter: structure => {
         if (structure.structureType === STRUCTURE_WALL) {
           return structure.hits < 10000;
@@ -27,13 +27,13 @@ export default (creep: Creep) => {
       },
     });
 
-    if (!structures.length) {
+    if (!structure) {
       harvest(creep);
       return;
     }
 
-    if (creep.repair(structures[0]) == ERR_NOT_IN_RANGE) {
-      creep.moveTo(structures[0], workerMoveOpts);
+    if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
+      creep.moveTo(structure, workerMoveOpts);
     }
 
     return;

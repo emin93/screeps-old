@@ -1,5 +1,16 @@
 export type CreepRole = 'builder' | 'harvester' | 'upgrader' | 'repairer' | 'ranger' | 'melee';
 export type CreepType = 'defender' | 'worker';
+export type CreepJob =
+  | 'building'
+  | 'harvesting'
+  | 'repairing'
+  | 'replenishing'
+  | 'upgrading'
+  | 'recycling'
+  | 'renewing'
+  | 'defending'
+  | 'returning'
+  | 'patrolling';
 
 const workerBodys = [
   [
@@ -73,8 +84,7 @@ const meleeBodys = [
 export interface BaseCreepMemory extends CreepMemory {
   role: CreepRole;
   level: number;
-  isRecycling: boolean;
-  isRenewing: boolean;
+  job: CreepJob;
 }
 
 export const getTypeByRole = (role: CreepRole): CreepType => {

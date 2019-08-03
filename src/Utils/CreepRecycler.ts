@@ -17,7 +17,7 @@ export default () => {
     .filter(creep => {
       const memory = <BaseCreepMemory>creep.memory;
 
-      return memory.level < level || memory.isRecycling;
+      return memory.level < level || memory.job === 'recycling';
     });
 
   if (!underleveledCreeps.length) {
@@ -27,14 +27,14 @@ export default () => {
   const creep = underleveledCreeps[0];
   const memory = <BaseCreepMemory>creep.memory;
 
-  if (!memory.isRecycling) {
-    memory.isRecycling = true;
+  if (memory.job !== 'recycling') {
+    memory.job = 'recycling';
   }
 
   const spawn = Game.spawns[env.spawnName];
 
   if (creep.transfer(spawn, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-    creep.moveTo(spawn, { visualizePathStyle: { fill: '#000000', opacity: 1 } });
+    creep.moveTo(spawn, { visualizePathStyle: { stroke: '#000000', opacity: 1 } });
 
     return;
   }
