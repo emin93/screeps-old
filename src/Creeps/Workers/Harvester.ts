@@ -1,5 +1,4 @@
 import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
-import upgrade from './Upgrader';
 
 export default (creep: Creep) => {
   const memory = <BaseCreepMemory>creep.memory;
@@ -41,7 +40,10 @@ export default (creep: Creep) => {
   });
 
   if (!target) {
-    upgrade(creep);
+    if (creep.room.controller && creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+      creep.moveTo(creep.room.controller, workerMoveOpts);
+    }
+
     return;
   }
 

@@ -13,11 +13,7 @@ export default (creep: Creep) => {
   }
 
   if (memory.job === 'upgrading') {
-    if (!creep.room.controller) {
-      return;
-    }
-
-    if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+    if (creep.room.controller && creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
       creep.moveTo(creep.room.controller, workerMoveOpts);
     }
 

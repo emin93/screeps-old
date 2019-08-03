@@ -1,5 +1,6 @@
 import { BaseCreepMemory, workerMoveOpts } from '../Base';
 import harvest from './Harvester';
+import build from './Builder';
 
 export default (creep: Creep) => {
   const memory = <BaseCreepMemory>creep.memory;
@@ -24,7 +25,7 @@ export default (creep: Creep) => {
     });
 
     if (!structure) {
-      harvest(creep);
+      build(creep);
       return;
     }
 
