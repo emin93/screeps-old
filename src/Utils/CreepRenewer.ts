@@ -12,7 +12,7 @@ export default () =>
 
       const memory = <BaseCreepMemory>creep.memory;
 
-      if (memory.job !== 'renewing' && creep.ticksToLive <= 50) {
+      if (memory.job !== 'renewing' && creep.ticksToLive <= 80) {
         memory.job = 'renewing';
       }
 
