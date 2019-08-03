@@ -1,22 +1,18 @@
 import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base';
 import harvest from './Harvester';
 
-interface UpgraderMemory extends BaseCreepMemory {
-  isRepairing: boolean;
-}
-
 export default (creep: Creep) => {
-  const memory = <UpgraderMemory>creep.memory;
+  const memory = <BaseCreepMemory>creep.memory;
 
-  if (memory.isRepairing && creep.carry.energy == 0) {
-    memory.isRepairing = false;
+  if (memory.job !== 'harvesting' && creep.carry.energy == 0) {
+    memory.job = 'harvesting';
   }
 
-  if (!memory.isRepairing && creep.carry.energy == creep.carryCapacity) {
-    memory.isRepairing = true;
+  if (memory.job !== 'repairing' && creep.carry.energy == creep.carryCapacity) {
+    memory.job = 'repairing';
   }
 
-  if (memory.isRepairing) {
+  if (memory.job === 'repairing') {
     const structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
       filter: structure => {
         if (structure.structureType === STRUCTURE_WALL) {

@@ -9,7 +9,6 @@ export type CreepJob =
   | 'recycling'
   | 'renewing'
   | 'defending'
-  | 'returning'
   | 'patrolling';
 
 const workerBodys = [
@@ -85,6 +84,7 @@ export interface BaseCreepMemory extends CreepMemory {
   role: CreepRole;
   level: number;
   job: CreepJob;
+  type: CreepType;
 }
 
 export const getTypeByRole = (role: CreepRole): CreepType => {

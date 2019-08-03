@@ -21,11 +21,7 @@ export const loop = () => {
     const creep = Game.creeps[name];
     const memory = <BaseCreepMemory>creep.memory;
 
-    if (memory.isRecycling) {
-      return;
-    }
-
-    if (memory.isRenewing) {
+    if (memory.job === 'recycling' || memory.job === 'renewing') {
       return;
     }
 

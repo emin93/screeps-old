@@ -8,7 +8,7 @@ export default (creep: Creep) => {
     memory.job = 'harvesting';
   }
 
-  if (memory.job === 'harvesting' && creep.carry.energy === creep.carryCapacity) {
+  if (memory.job !== 'replenishing' && creep.carry.energy === creep.carryCapacity) {
     memory.job = 'replenishing';
   }
 

@@ -3,11 +3,11 @@ import { BaseCreepMemory, workerMoveOpts, workerMoveToSourceOpts } from '../Base
 export default (creep: Creep) => {
   const memory = <BaseCreepMemory>creep.memory;
 
-  if (memory.job === 'upgrading' && creep.carry.energy == 0) {
+  if (memory.job !== 'harvesting' && creep.carry.energy == 0) {
     memory.job = 'harvesting';
   }
 
-  if (memory.job !== 'harvesting' && creep.carry.energy == creep.carryCapacity) {
+  if (memory.job !== 'upgrading' && creep.carry.energy == creep.carryCapacity) {
     memory.job = 'upgrading';
   }
 

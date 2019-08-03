@@ -1,4 +1,4 @@
-import { BaseCreepMemory, CreepRole, getBodyForRoleLevel } from '../Creeps/Base';
+import { BaseCreepMemory, CreepRole, getBodyForRoleLevel, getTypeByRole } from '../Creeps/Base';
 import env from '../env';
 import { getCurrentGameLevel } from './GameLevel';
 
@@ -47,8 +47,9 @@ export default () => {
     return;
   }
 
+  const type = getTypeByRole(role);
   const body = getBodyForRoleLevel(role, level);
   const id = Date.now();
 
-  Game.spawns[env.spawnName].spawnCreep(body, `${role}${id}`, { memory: { role, level } });
+  Game.spawns[env.spawnName].spawnCreep(body, `${role}${id}`, { memory: { role, level, type } });
 };

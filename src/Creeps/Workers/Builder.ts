@@ -4,7 +4,7 @@ import harvest from './Harvester';
 export default (creep: Creep) => {
   const memory = <BaseCreepMemory>creep.memory;
 
-  if (memory.job === 'building' && creep.carry.energy == 0) {
+  if (memory.job !== 'harvesting' && creep.carry.energy == 0) {
     memory.job = 'harvesting';
   }
 

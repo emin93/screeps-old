@@ -27,6 +27,10 @@ export default () =>
     }
 
     if (response === OK && creep.ticksToLive > memory.level * 150) {
-      memory.job = 'returning';
+      if (memory.type === 'worker') {
+        memory.job = 'harvesting';
+      } else {
+        memory.job = 'patrolling';
+      }
     }
   });
