@@ -8,32 +8,36 @@ export default (creep: Creep) => {
     return;
   }
 
-  const closestEnemy = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+  let closestTarget: any = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
-  if (memory.job !== 'defending' && closestEnemy && creep.pos.inRangeTo(flag.pos, 5)) {
+  if (!closestTarget) {
+    closestTarget = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES);
+  }
+
+  if (memory.job !== 'defending' && closestTarget && creep.pos.inRangeTo(flag, 5)) {
     memory.job = 'defending';
   }
 
-  if (memory.job !== 'patrolling' && !closestEnemy) {
+  if (memory.job !== 'patrolling' && !closestTarget) {
     memory.job = 'patrolling';
   }
 
   if (memory.job === 'patrolling') {
-    creep.moveTo(flag.pos, defenderMoveOpts);
+    creep.moveTo(flag, defenderMoveOpts);
     return;
   }
 
-  if (!closestEnemy) {
+  if (!closestTarget) {
     return;
   }
 
   if (memory.role === 'ranger') {
-    if (creep.rangedAttack(closestEnemy) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(closestEnemy.pos, defenderMoveToEnemyOpts);
+    if (creep.rangedAttack(closestTarget) === ERR_NOT_IN_RANGE) {
+      creep.moveTo(closestTarget, defenderMoveToEnemyOpts);
     }
   } else if (memory.role === 'melee') {
-    if (creep.attack(closestEnemy) === ERR_NOT_IN_RANGE) {
-      creep.moveTo(closestEnemy.pos, defenderMoveToEnemyOpts);
+    if (creep.attack(closestTarget) === ERR_NOT_IN_RANGE) {
+      creep.moveTo(closestTarget, defenderMoveToEnemyOpts);
     }
   }
 };
