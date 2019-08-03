@@ -30,7 +30,7 @@ export default (creep: Creep) => {
     return;
   }
 
-  const targets = creep.room.find(FIND_STRUCTURES, {
+  const target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
     filter: structure =>
       (structure.structureType === STRUCTURE_EXTENSION ||
         structure.structureType === STRUCTURE_SPAWN ||
@@ -38,12 +38,12 @@ export default (creep: Creep) => {
       structure.energy < structure.energyCapacity,
   });
 
-  if (!targets.length) {
+  if (!target) {
     upgrade(creep);
     return;
   }
 
-  if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-    creep.moveTo(targets[0], workerMoveOpts);
+  if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+    creep.moveTo(target, workerMoveOpts);
   }
 };
