@@ -10,7 +10,7 @@ export default (creep: Creep) => {
 
   const closestEnemy = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
-  if (memory.job !== 'defending' && closestEnemy) {
+  if (memory.job !== 'defending' && closestEnemy && creep.pos.inRangeTo(flag.pos, 5)) {
     memory.job = 'defending';
   }
 
