@@ -8,7 +8,7 @@ export default (creep: Creep) => {
     memory.job = 'defending';
   }
 
-  if (memory.job === 'defending' && !closestEnemy) {
+  if (memory.job !== 'patrolling' && !closestEnemy) {
     memory.job = 'patrolling';
   }
 
