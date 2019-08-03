@@ -13,11 +13,12 @@ export default () => {
   }
 
   const underleveledCreeps = Object.keys(Game.creeps)
+    .sort()
     .map(name => Game.creeps[name])
     .filter(creep => {
       const memory = <BaseCreepMemory>creep.memory;
 
-      return memory.level < level || memory.job === 'recycling';
+      return memory.job === 'recycling' || memory.level < level;
     });
 
   if (!underleveledCreeps.length) {

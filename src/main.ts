@@ -1,6 +1,5 @@
 import { BaseCreepMemory } from './Creeps/Base';
-import meleeDefend from './Creeps/Defenders/Melee';
-import rangeDefend from './Creeps/Defenders/Ranger';
+import defend from './Creeps/Defender';
 import build from './Creeps/Workers/Builder';
 import harvest from './Creeps/Workers/Harvester';
 import repair from './Creeps/Workers/Repairer';
@@ -39,10 +38,10 @@ export const loop = () => {
         repair(creep);
         break;
       case 'ranger':
-        rangeDefend(creep);
+        defend(creep);
         break;
       case 'melee':
-        meleeDefend(creep);
+        defend(creep);
         break;
       default:
         harvest(creep);
